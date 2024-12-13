@@ -1,18 +1,25 @@
-"use client"
+"use client";
 import dynamic from "next/dynamic";
 import React from "react";
 
 // Dynamically import ReactApexChart to ensure proper rendering in Next.js
 const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const ChartComponent = ({ data }) => {
+const ChartComponent = ({ data, data1 }) => {
   const options = {
     series: [
       {
-        name: "XYZ MOTORS",
+        name: "Acceleration 1",
         data: data,
       },
+      {
+        name: "Acceleration 2", 
+        data: data1,
+      },
     ],
+    stroke: {
+      width: [2, 2],
+    },
     chart: {
       type: "area",
       stacked: false,
@@ -33,7 +40,7 @@ const ChartComponent = ({ data }) => {
       size: 0,
     },
     title: {
-      text: "Stock Price Movement",
+      text: "ADXL 1", // Title
       align: "left",
     },
     fill: {
@@ -47,23 +54,30 @@ const ChartComponent = ({ data }) => {
       },
     },
     yaxis: {
+      min: 1.5,  // Fixed y-axis min value
+      max: 2.5,  // Fixed y-axis max value
       labels: {
         formatter: function (val) {
-          return (val / 1000000).toFixed(0);
+          return val.toFixed(5);  // Format labels with two decimals
         },
       },
       title: {
-        text: "Price",
+        text: "Acceleration Range", 
       },
     },
     xaxis: {
-      type: "datetime",
+      min: 1, 
+      max: 200, 
+      type: "numeric",
+      title: {
+        text: "Reading Number",
+      },
     },
     tooltip: {
-      shared: false,
+      shared: true,
       y: {
         formatter: function (val) {
-          return (val / 1000000).toFixed(0);
+          return val.toFixed(5); 
         },
       },
     },
@@ -71,7 +85,7 @@ const ChartComponent = ({ data }) => {
 
   return (
     <div id="chart">
-      <ReactApexChart options={options} series={options.series} type="area" height={350} />
+      <ReactApexChart options={options} series={options.series} type="area" height={600} />
     </div>
   );
 };

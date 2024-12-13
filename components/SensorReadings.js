@@ -4,80 +4,87 @@ import { db, ref, onValue } from "../components/firebase";
 import ChartComponent from "./ChartComponent";
 
 const Sensorvalues = () => {
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [chartData, setChartData] = useState([]);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [chartData, setChartData] = useState([]);
 
-    useEffect(() => {
-        const sensorRef = ref(db, "SensorData");
+  useEffect(() => {
+    const sensorRef = ref(db, "SensorData");
 
-        onValue(sensorRef, (snapshot) => {
-            const data = snapshot.val();
-            setData(data);
+    onValue(sensorRef, (snapshot) => {
+      const data = snapshot.val();
+      setData(data);
 
-            // Transform the data for the chart
-            const transformedData = [];
-            let readingNo = 1;
-
-            Object.entries(data).forEach(([sensor, values]) => {
-                if (sensor !== "restart") {
-                    Object.entries(values).forEach(([timestamp, readings]) => {
-                        transformedData.push({
-                            x: readingNo++, // Sequential reading number
-                            y: readings.X,  // X value from the sensor
-                        });
-                    });
-                }
+      const transformedData = [];
+      let readingNo = 1;
+      Object.entries(data).forEach(([sensor, values]) => {
+        if (sensor !== "restart") {
+            if(readingNo>=200);
+            {
+                readingNo=1;
+            }
+          Object.entries(values).forEach(([timestamp, readings]) => {
+            transformedData.push({
+              x: readingNo++, 
+              y: readings.X,
             });
+          });
+        }
+      });
 
-            setChartData(transformedData);
-            setLoading(false);
-        });
+      setChartData(transformedData);
+      setLoading(false);
+    });
 
-        return () => {
-            sensorRef.off();
-        };
-    }, []);
+    // return () => {
+    //   sensorRef.off();
+    // };
+  }, []);
 
-    if (loading) {
-        return <p>Loading sensor data...</p>;
-    }
+  if (loading) {
+    return <p>Loading sensor data...</p>;
+  }
 
-    return (
-        <div className="w-screen flex">
-            {/* Chart Section */}
-            <div className="flex flex-col w-1/2">
-                <div className="font-bold text-4xl">Controls and Graphs</div>
-                <div className="font-bold text-2xl">{`Restart Value : ${data.restart}`}</div>
-                <div>
-                    <ChartComponent data={chartData} />
-                </div>
-            </div>
+  const Data = chartData.slice(5, 205);  // First line data
+  const Data1 = chartData.slice(206, 406).map(value => {return({...value, x :value.x - 200})});  // Second line data
 
-            {/* Sensor Readings Section */}
-            <div className="w-1/2">
-                <h1>Sensor values</h1>
-                {Object.keys(data).length === 0 ? (
-                    <p>No data available.</p>
-                ) : (
-                    <div>
-                        {Object.entries(data).map(([key, value]) => (
-                            <div key={key}>
-                                {key === "restart" ? <></> : <strong>{key}</strong>}
-                                <div className="flex flex-col">
-                                    {Object.entries(value).map(([timestamp, values]) => (
-                                        <div className="flex" key={timestamp}>
-                                            <strong>{timestamp}</strong>: X = {values.X}, Y = {values.Y}, Z = {values.Z}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+  return (
+    <div className="w-screen flex lg:flex-row flex-col justify-around">
+      {/* Chart Section */}
+      <div className="lg:w-[60%] w-full relative">
+      <div className="flex flex-col lg:w-[60%] w-[90%] lg:fixed">
+        <div className="font-bold lg:text-4xl text-xl">Controls and Graphs</div>
+        <div className="font-bold lg:text-2xl text-lg">{`Restart Value : ${data.restart}`}</div>
+        <div>
+          <ChartComponent data={Data} data1={Data1} />
         </div>
-    );
+      </div>
+      </div>
+
+      {/* Sensor Readings Section */}
+      <div className="w-auto">
+        <h1>Sensor values</h1>
+        {Object.keys(data).length === 0 ? (
+          <p>No data available.</p>
+        ) : (
+          <div>
+            {Object.entries(data).map(([key, value]) => (
+              <div key={key}>
+                {key === "restart" ? <></> : <strong>{key}</strong>}
+                <div className="flex flex-col">
+                  {Object.entries(value).map(([timestamp, values]) => (
+                    <div className="flex" key={timestamp}>
+                      <strong>{timestamp}</strong>: X = {values.X}, Y = {values.Y}, Z = {values.Z}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Sensorvalues;
