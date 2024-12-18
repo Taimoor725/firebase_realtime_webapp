@@ -14,7 +14,7 @@ function page() {
     <div className='grid grid-cols-2 ml-[20%] gap-10 p-20 space-x-28 w-full h-full'>
         <div className='flex flex-col items-center justify-center mt-10'>
             <Image src={'/WhatsApp Image 2024-12-18 at 10.16.18_778533f9.jpg'} height={600} width={600} className='w-[350px] h-[350px] rounded-full object-cover'/>
-            <div className=' font-bold text-2xl'>Hathim Abu Hathim</div>
+            <div className=' font-bold text-2xl'>Hatim Abu Hatim</div>
         </div>
 
         <div className='flex flex-col items-center justify-center'>
