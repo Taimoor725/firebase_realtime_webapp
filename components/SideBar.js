@@ -16,7 +16,7 @@ function SideBar() {
     };
 
     return (
-        <div className='w-[20%] h-screen bg-[#254c74] fixed overflow-y-auto flex flex-col'>
+        <div className='w-[20%] h-screen bg-[#254c74] fixed overflow-y-auto flex flex-col z-50'>
             {/* Logo Section */}
             <div className='w-full h-[40%] flex justify-center items-center'>
                 <Image src={"/logo/uet-lahore-seeklogo.svg"} alt='image' height={200} width={200} className='object-cover w-60 h-60'/>
@@ -31,9 +31,9 @@ function SideBar() {
                 </button>
                 </Link>
 
-                <button className='bg-[gold] w-2/3 p-2 font-semibold rounded-xl text-xl'>
+                <Link href={'/group'} className='bg-[gold] w-2/3 p-2 font-semibold rounded-xl text-xl flex justify-center items-center'>
                     Group Member
-                </button>
+                </Link>
 
                 {/* <button className='bg-[gold] w-2/3 p-2 font-semibold rounded-xl text-xl'>
                     Specimen

@@ -1,10 +1,10 @@
 "use client";
-import SideBar from "@/components/SideBar";
+// import SideBar from "@/components/SideBar";
 import React from "react";
-
+import Image from "next/image";
 function HomePage() {
   return (
-    <div className="w-[80%] ml-[20%] flex h-screen bg-gray-100 text-gray-800">
+    <div className="w-[80%] ml-[20%] flex h-screen bg-gray-100 text-gray-800 overflow-x-hidden">
         {/* <SideBar/> */}
       <div className="w-[80%] p-10">
       <h1 className="text-4xl font-bold text-center text-[#00274D] mb-8">
@@ -23,7 +23,7 @@ function HomePage() {
           window pane, serving as a proof-of-concept.
         </p>
       </section>
-
+      
       {/* Proposed Method and Experimental Setup */}
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">
@@ -82,8 +82,13 @@ function HomePage() {
         </ul>
       </section>
 
+    <div className="w-[2000px] justify-center items-center mt-10">
+    <Image src={'/aspect.jpg'}  height={600} width={600} className="object-cover h-[600px] w-[70%]"/>
+      </div>
+
+
       {/* Footer */}
-      <footer className="mt-10 text-center text-gray-600">
+      <footer className="mt-10 text-center text-gray-600 my-5">
         <p>
           Submitted by: Muhammad Abdullah Akhtar, Taimoor Tanveer, Hammad Saeed,
           Hatem Ali Mafleh Saleh Abo Hatem
