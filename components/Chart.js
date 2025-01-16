@@ -8,8 +8,7 @@ const Sensorvalues = () => {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    // Fetch and read the local JSON file
-    fetch("/previous_data.json") // Ensure this file is served in the public directory
+    fetch("/previous_data.json")
       .then((response) => response.json())
       .then((jsonData) => {
         let jD = jsonData.SensorData.ADXL1;
@@ -38,12 +37,6 @@ const Sensorvalues = () => {
   if (loading) {
     return <p>Loading sensor data...</p>;
   }
-
-  // const Data = chartData.slice(5, 205); // First line data
-  // const Data1 = chartData
-  //   .slice(206, 406)
-  //   .map((value) => ({ ...value, x: value.x - 200 })); // Second line data
-
   return (
     <div className="w-full flex lg:flex-row flex-col justify-around">
       {/* Chart Section */}
