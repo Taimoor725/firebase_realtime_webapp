@@ -48,9 +48,11 @@ const Sensorvalues = () => {
   const sensorKeys = Object.keys(data);
 
   return (
-    <div className="flex-1 overflow-y-auto p-10">
+    // <div className="overflow-hidden">
+    <div className="flex-1 h-screen p-40 overflow-hidden">
       {/* Sensor Readings Section */}
-      <div className="w-full flex flex-wrap">
+      <div className="p-5 _bg-gray-100 h-[99%]  overflow-y-scroll bg-gray-100 rounded-2xl border-[2px] border-black">
+      <div className="w-full h-auto min-h-[50vh] flex flex-wrap p-5">
         <h1 className="w-full text-xl font-bold">Sensor values</h1>
         {sensorKeys.length === 0 ? (
           <p>No data available.</p>
@@ -72,7 +74,9 @@ const Sensorvalues = () => {
           ))
         )}
       </div>
+      </div>
     </div>
+    // </div>
   );
 };
 

@@ -15,10 +15,8 @@ const Page = () => {
             </div>
             <div className="w-1/2 flex items-center justify-center">
                 <Image src={"/ai.png"} width={512} height={512} className="object-cover border-none" alt="ai-im" />
-
             </div>
         </div>
     )
 }
-
 export default Page;

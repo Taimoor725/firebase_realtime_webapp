@@ -7,7 +7,10 @@ const inter = Inter({subsets: ['latin']})
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`relative ${inter.className}`}>
+      <body className={`relative ${inter.className}`}
+        data-new-gr-c-s-check-loaded="14.1237.0"
+        data-gr-ext-installed=""
+      >
         <Navbar/>
         {children}
       </body>

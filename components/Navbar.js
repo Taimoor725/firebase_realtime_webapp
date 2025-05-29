@@ -10,10 +10,10 @@ export default function Navbar() {
       </div>
 
       <div className="flex gap-4 pr-6 text-lg">
-        <a href="#home" className="rounded-md"> Abstract </a>
-        <a href="#about" className="rounded-md"> Readings </a>
-        <a href="#services" className="rounded-md"> Graphs </a>
-        <a href="#contact" className="rounded-md"> Members </a>
+        <a href="/" className="rounded-md"> Home </a>
+        <a href="/readings" className="rounded-md"> Readings </a>
+        <a href="/plot" className="rounded-md"> Graphs </a>
+        <a href="/group/" className="rounded-md"> Members </a>
       </div>
     </div>
   );
